@@ -28,17 +28,19 @@ public class generator extends AppCompatActivity {
         scanQr=findViewById(R.id.qrScanBtn);
         qr=findViewById(R.id.qr);
 
+        String data=getIntent().getStringExtra("uid");
+        //editText.setText(data);
+        editText.setVisibility(View.INVISIBLE);
+        genQr.setVisibility(View.INVISIBLE);
+        generate(data);
+
         genQr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data=editText.getText().toString();
-                String type=QRGContents.Type.TEXT;
                 if(data.isEmpty()){
                     Snackbar.make(v,"enter value!",Snackbar.LENGTH_SHORT).show();
                 }else{
-                    QRGEncoder qrgEncoder=new QRGEncoder(data,null, type,500);
-                    Bitmap qrBits=qrgEncoder.getBitmap();
-                    qr.setImageBitmap(qrBits);
+                    generate(data);
                 }
             }
         });
@@ -51,5 +53,14 @@ public class generator extends AppCompatActivity {
         });
 
 
+    }
+
+    private void generate(String data) {
+        String type=QRGContents.Type.TEXT;
+        {
+            QRGEncoder qrgEncoder=new QRGEncoder(data,null, type,500);
+            Bitmap qrBits=qrgEncoder.getBitmap();
+            qr.setImageBitmap(qrBits);
+        }
     }
 }

@@ -35,7 +35,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
+        myRef=database.getReference();
         bck=findViewById(R.id.bckBtn);
         save=findViewById(R.id.saveBtn);
         name=findViewById(R.id.name);
@@ -60,12 +60,6 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                 Snackbar.make(v, "Fill missing details!", Snackbar.LENGTH_SHORT).show();
             }
             else {
-                myRef=database.getReference("users/"+mAuth.getUid());
-                myRef.child("name").setValue(name.getText().toString());
-                myRef.child("no").setValue(no.getText().toString());
-                myRef.child("email").setValue(email);
-                myRef.child("pwd").setValue(password);
-                myRef.child("uid").setValue(mAuth.getUid());
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -73,8 +67,17 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Snackbar.make(v, name+" Account created!", Snackbar.LENGTH_SHORT).show();
+                                    myRef=database.getReference().child("users").child(user.getUid());
+                                    myRef.child("name").setValue(name.getText().toString());
+                                    myRef.child("no").setValue(no.getText().toString());
+                                    myRef.child("email").setValue(email);
+                                    myRef.child("pwd").setValue(password);
+                                    myRef.child("uid").setValue(mAuth.getUid());
                                     updateUI(user);
+                                    Intent intent=new Intent(Signup.this,readyToGo.class);
+                                    intent.putExtra("uid",mAuth.getUid());
+                                    startActivity(intent);
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Snackbar.make(v, "Account creation failed!", Snackbar.LENGTH_SHORT).show();

@@ -18,8 +18,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
     Button loginBtn;
@@ -48,9 +51,10 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     protected void onResume() {
         super.onResume();
         if(user!=null){
-//            Toast.makeText(this, "Welcome "+user.getEmail(), Toast.LENGTH_SHORT).show();
-//            finish();
-//            startActivity(new Intent(LoginPage.this,generator.class));
+            Intent intent=new Intent(LoginPage.this,ShareQr.class);
+            intent.putExtra("uid",user.getUid());
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -84,10 +88,21 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(LoginPage.this, " signin success", Toast.LENGTH_SHORT).show();
-                        updateUI(user);
+                        myRef=database.getReference().child("users").child(user.getUid()).child("name");
+                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Toast.makeText(LoginPage.this, "Welcome "+snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+                                updateUI(user);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                        startActivity(new Intent(LoginPage.this,ShareQr.class));
                         finish();
-                        startActivity(new Intent(LoginPage.this,generator.class));
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(LoginPage.this, "signin failiure", Toast.LENGTH_SHORT).show();
