@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShareQr">
+    tools:context=".QR">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:theme="@style/Theme.QrApplication.AppBarOverlay"
-        android:background="#222222">
+        android:layout_height="240dp"
+        android:theme="@style/Theme.QrApplication.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,8 +23,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/bck"
-                    android:visibility="invisible"
+                    android:id="@+id/bck2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -33,74 +31,46 @@
                     android:backgroundTint="@color/white" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="68dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="6dp"
-                android:src="@drawable/user" />
-            <ImageView
-                android:id="@+id/availibility"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_marginLeft="-12dp"
-                android:layout_gravity="top"
-                android:src="@drawable/available" />
-
             <TextView
-                android:id="@+id/userName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="14dp"
-                android:hint="Username"
+                android:layout_margin="40dp"
+                android:text="Share Profile"
+                android:textSize="22sp"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
-
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/tablayout"
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2B2B2B"
+            android:background="#474747"
             app:tabIndicatorColor="#CFCFCF"
             app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorHeight="4dp"
             app:tabMode="fixed"
             app:tabTextColor="@android:color/white">
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab1"
+                android:id="@+id/disp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chats" />
+                android:text="Disp" />
 
             <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab2"
+                android:id="@+id/Scan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Available" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tab3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calls" />
+                android:text="Scan" />
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/pager2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

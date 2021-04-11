@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -51,7 +47,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     protected void onResume() {
         super.onResume();
         if(user!=null){
-            Intent intent=new Intent(LoginPage.this,ShareQr.class);
+            Intent intent=new Intent(LoginPage.this, home.class);
             intent.putExtra("uid",user.getUid());
             startActivity(intent);
             finish();
@@ -101,7 +97,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
                             }
                         });
-                        startActivity(new Intent(LoginPage.this,ShareQr.class));
+                        startActivity(new Intent(LoginPage.this, home.class));
                         finish();
                     } else {
                         // If sign in fails, display a message to the user.

@@ -15,7 +15,7 @@ public class readyToGo extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(readyToGo.this, ShareQr.class);
+                Intent intent=new Intent(readyToGo.this, home.class);
                 intent.putExtra("uid",getIntent().getStringExtra("uid"));
                 startActivity(intent);
                 finish();

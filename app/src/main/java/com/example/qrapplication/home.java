@@ -9,12 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,9 +23,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ShareQr extends AppCompatActivity {
+public class home extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private FirebaseUser user;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     TextView name;
@@ -36,7 +32,7 @@ public class ShareQr extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share_qr);
+        setContentView(R.layout.activity_home);
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolbar);
         statusColor=findViewById(R.id.availibility);
         setSupportActionBar(toolbar);
@@ -97,10 +93,14 @@ public class ShareQr extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.signout){
             mAuth.signOut();
-            startActivity(new Intent(ShareQr.this,LoginPage.class));
+            startActivity(new Intent(home.this,LoginPage.class));
             finish();
         }else if(item.getItemId()==R.id.profile){
-            Intent intent=new Intent(ShareQr.this,profilepage.class);
+            Intent intent=new Intent(home.this,profilepage.class);
+            intent.putExtra("uid",getIntent().getStringExtra("uid"));
+            startActivity(intent);
+        }else if(item.getItemId()==R.id.scan){
+            Intent intent=new Intent(home.this,QR.class);
             intent.putExtra("uid",getIntent().getStringExtra("uid"));
             startActivity(intent);
         }
