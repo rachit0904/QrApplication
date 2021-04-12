@@ -26,14 +26,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     EditText usname,pwd;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private FirebaseDatabase database;
-    private DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
         mAuth = FirebaseAuth.getInstance();
-        database=FirebaseDatabase.getInstance();
         loginBtn=findViewById(R.id.loginBtn);
         signUp=findViewById(R.id.signupBtn);
         signUp.setOnClickListener(this);
@@ -83,21 +80,11 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        myRef=database.getReference().child("users").child(user.getUid()).child("name");
-                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Toast.makeText(LoginPage.this, "Welcome "+snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-                                updateUI(user);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                        startActivity(new Intent(LoginPage.this, home.class));
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        updateUI(currentUser);
+                        Intent intent=new Intent(LoginPage.this, home.class);
+                        intent.putExtra("uid",user.getUid());
+                        startActivity(intent);
                         finish();
                     } else {
                         // If sign in fails, display a message to the user.

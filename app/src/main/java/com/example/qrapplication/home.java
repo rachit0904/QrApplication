@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,11 +40,12 @@ public class home extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
         name=findViewById(R.id.userName);
-        myRef=database.getReference().child("users").child(getIntent().getStringExtra("uid")).child("name");
+        myRef=database.getReference().child("users").child(getIntent().getStringExtra("uid"));
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                name.setText(snapshot.getValue(String.class));
+                name.setText(snapshot.child("name").getValue(String.class));
+
             }
 
             @Override
@@ -51,6 +53,13 @@ public class home extends AppCompatActivity {
 
             }
         });
+
+        if(getIntent().getStringExtra("scanned uid")!=null){
+            myRef.child("added_contacts").child(getIntent().getStringExtra("scanned uid")).child("name").setValue(getIntent().getStringExtra("scanned name"));
+            myRef.child("added_contacts").child(getIntent().getStringExtra("scanned uid")).child("no").setValue(getIntent().getStringExtra("scanned no"));
+            myRef.child("added_contacts").child(getIntent().getStringExtra("scanned uid")).child("uid").setValue(getIntent().getStringExtra("scanned uid"));
+        }
+
         TabLayout tabLayout = findViewById(R.id.tabs);
         checkNetwork();
         ViewPager viewPager=findViewById(R.id.pager);
@@ -103,6 +112,7 @@ public class home extends AppCompatActivity {
             Intent intent=new Intent(home.this,QR.class);
             intent.putExtra("uid",getIntent().getStringExtra("uid"));
             startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

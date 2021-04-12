@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".tab1">
+
     <TextView
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginBottom="130dp"
-        android:layout_above="@id/textView10"
+        android:gravity="center"
         android:text="Oops! Looks like you are all alone in here.."
         android:textSize="18sp" />
 
@@ -22,9 +22,19 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textColor="#707070"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="84dp"
         android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="125dp"
         android:text="Pssp: Invite friend's and people to get going!"
         android:textSize="14sp" />
-</RelativeLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="55dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:layout_marginRight="30dp"
+        app:srcCompat="@drawable/chat" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

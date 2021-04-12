@@ -52,6 +52,20 @@ public class profilepage extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            boolean flag=true;
+            @Override
+            public void onClick(View v) {
+                if(flag==true) {
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.done));
+                    flag=false;
+                }else if(flag==false){
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.edit));
+                    flag=true;
+                }
+            }
+        });
+
         ImageButton bck=findViewById(R.id.bck);
         bck.setOnClickListener(new View.OnClickListener() {
             @Override
