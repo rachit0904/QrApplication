@@ -2,11 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
-        <item android:id="@+id/scan" android:title="Add contact "
-            android:icon="@drawable/scan" app:showAsAction="always"/>
-        <item android:id="@+id/profile" android:title="profile "
+        <item android:id="@+id/inbox" android:title="Inbox"
+            android:icon="@drawable/inbox" app:showAsAction="always"/>
+        <item android:id="@+id/profile" android:title="Profile "
         android:icon="@drawable/user"   app:showAsAction="withText" />
-        <item android:id="@+id/signout" android:title="signout "
+        <item android:id="@+id/settings" android:title="Settings"
+            android:icon="@drawable/user"   app:showAsAction="withText" />
+        <item android:id="@+id/help" android:title="Help"
+            android:icon="@drawable/user"   app:showAsAction="withText" />
+        <item android:id="@+id/signout" android:title="Signout "
             app:showAsAction="collapseActionView"/>
     </group>
 

@@ -33,6 +33,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.util.ArrayList;
+
 public class scanqr extends Fragment {
     CodeScanner codeScanner;
     AlertDialog dialog;

@@ -3,7 +3,10 @@ package Data;
 public class UsersData {
     public String number,name;
 
-    public UsersData( String name,String number) {
+    public UsersData() {
+    }
+
+    public UsersData(String name, String number) {
         this.number = number;
         this.name = name;
     }

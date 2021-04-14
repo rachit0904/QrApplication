@@ -8,7 +8,8 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
         android:theme="@style/Theme.QrApplication.AppBarOverlay"
         android:background="#222222">
 
@@ -25,7 +26,6 @@
                 android:layout_height="30dp"
                 android:background="@drawable/bck"
                 android:backgroundTint="@color/white" />
-
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
