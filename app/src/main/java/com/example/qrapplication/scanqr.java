@@ -39,7 +39,9 @@ public class scanqr extends Fragment {
     CodeScanner codeScanner;
     AlertDialog dialog;
     AlertDialog.Builder builder;
-    Button addBtn;TextView scannedName,scannedNo;
+    Button addBtn;
+    TextView scannedName;
+    TextView scannedNo;
     CodeScannerView scannerView;
     FirebaseAuth auth;
     FirebaseDatabase database;
