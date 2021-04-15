@@ -63,7 +63,9 @@ public class profilepage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(flag==true) {
-                    name.setEnabled(true);no.setEnabled(true);dob.setEnabled(true);
+                    name.setEnabled(true);
+                    no.setEnabled(true);
+                    dob.setEnabled(true);
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.done));
                     flag=false;
                 }else if(flag==false){
