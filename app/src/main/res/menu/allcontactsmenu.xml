@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/search" app:showAsAction="always"
+        android:title="search" android:icon="@drawable/search"/>
+    <item android:id="@+id/filter" app:showAsAction="always"
+        android:title="filter" android:icon="@drawable/filter"/>
+    <item android:id="@+id/inviteUser" app:showAsAction="withText"
+        android:title="Invite" />
+    <item android:id="@+id/share" app:showAsAction="withText"
+        android:title="Share" android:icon="@drawable/share"/>
+
+
+
+</menu>

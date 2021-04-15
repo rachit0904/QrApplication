@@ -51,24 +51,22 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-           <!-- <TableRow
+          <TableRow
                 android:gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/invite"
+                <ImageButton
+                    android:id="@+id/deleteUser"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="38dp"
-                    android:hint="Remove"
-                    android:textColorHint="#E53935"
-                    android:textSize="16sp"
-                    android:textStyle="bold"></TextView>
+                    android:background="@drawable/delete">
+                </ImageButton>
 
             </TableRow>
-            -->
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
