@@ -25,9 +25,6 @@ public class Inbox extends AppCompatActivity {
         bck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Inbox.this,home.class);
-                intent.putExtra("uid",getIntent().getStringExtra("uid"));
-                startActivity(intent);
                 finish();
             }
         });

@@ -31,8 +31,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import Data.UsersData;
-
 public class home extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
@@ -41,7 +39,7 @@ public class home extends AppCompatActivity {
     ImageView statusColor;
     SwipeRefreshLayout refreshLayout;
     int addedCount=-1;
-    Set<String> names=new HashSet<>();
+    ArrayList<String> names=new ArrayList<>();ArrayList<String> no=new ArrayList<>();ArrayList<String> uid=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +66,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 checkNetwork();
-                upldateList();
+                updateList();
                 refreshLayout.setRefreshing(false);
             }
         });
@@ -105,7 +103,7 @@ public class home extends AppCompatActivity {
                     myRef.child("added_contacts").child(String.valueOf(userCount)).child("no").setValue(getIntent().getStringExtra("scanned no"));
                     myRef.child("added_contacts").child(String.valueOf(userCount)).child("uid").setValue(getIntent().getStringExtra("scanned uid"));
                     myRef.child("available_contacts").setValue(String.valueOf(userCount));
-                    upldateList();
+                    updateList();
                 }
             }
         },400);
@@ -124,11 +122,13 @@ public class home extends AppCompatActivity {
             @Override
             public void run() {
                 Toast.makeText(home.this, names.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(home.this, no.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(home.this, uid.toString(), Toast.LENGTH_SHORT).show();
             }
         },1200);
     }
 
-    private void upldateList() {
+    private void updateList() {
         names.clear();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -138,6 +138,8 @@ public class home extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (int i = 1; i <= addedCount; i++) {
                             names.add( snapshot.child("added_contacts").child("" + i).child("name").getValue(String.class));
+                            no.add( snapshot.child("added_contacts").child("" + i).child("no").getValue(String.class));
+                            uid.add( snapshot.child("added_contacts").child("" + i).child("uid").getValue(String.class));
                         }
                     }
 
@@ -148,13 +150,14 @@ public class home extends AppCompatActivity {
                 });
             }
         },800);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         checkNetwork();
-        upldateList();
+        updateList();
     }
 
     private void checkNetwork() {
@@ -193,6 +196,9 @@ public class home extends AppCompatActivity {
         }else if(item.getItemId()==R.id.inbox){
             Intent intent=new Intent(home.this,Inbox.class);
             intent.putExtra("uid",getIntent().getStringExtra("uid"));
+            intent.putStringArrayListExtra("names",names);
+            intent.putStringArrayListExtra("no",no);
+            intent.putStringArrayListExtra("uid",uid);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

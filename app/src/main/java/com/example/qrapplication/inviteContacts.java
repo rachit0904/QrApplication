@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.UsersData;
-import RecyclerAdapter.Adapter;
+
+import RecyclerAdapter.Adapter3;
 
 public class inviteContacts extends Fragment {
     private RecyclerView recyclerView;
@@ -28,6 +29,9 @@ public class inviteContacts extends Fragment {
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_invitecontacts,null);
         TextView title=getActivity().findViewById(R.id.inboxTitle);
+        ArrayList<String> names=getActivity().getIntent().getStringArrayListExtra("names");
+        ArrayList<String> no=getActivity().getIntent().getStringArrayListExtra("no");
+        ArrayList<String> uid=getActivity().getIntent().getStringArrayListExtra("uid");
       ImageButton bck=getActivity().findViewById(R.id.bckbutton);
       bck.setBackground(getResources().getDrawable(R.drawable.close));
       bck.setOnClickListener(new View.OnClickListener() {
@@ -46,11 +50,11 @@ public class inviteContacts extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         dataList=new ArrayList<>();
-        for(int i=1;i<9;i++){
-            UsersData data=new UsersData("user "+i,"9637216675");
+        for(int i=0;i<names.size();i++){
+            UsersData data=new UsersData(names.get(i),no.get(i));
             dataList.add(data);
         }
-        adapter=new Adapter(view.getContext(),dataList);
+        adapter=new Adapter3(view.getContext(),dataList);
         recyclerView.setAdapter(adapter);
         return view;
     }

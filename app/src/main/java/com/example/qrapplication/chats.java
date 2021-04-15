@@ -23,16 +23,6 @@ public class chats extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_chats, container, false);
-        ImageButton bck=getActivity().findViewById(R.id.bckbutton);
-        bck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),home.class);
-                intent.putExtra("uid",getActivity().getIntent().getStringExtra("uid"));
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
         FloatingActionButton contacts=view.findViewById(R.id.contacts);
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
