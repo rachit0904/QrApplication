@@ -72,7 +72,9 @@ public class profilepage extends AppCompatActivity {
                     reference.child("dob").setValue(dob.getText().toString());
                     Snackbar.make(v,"Saved",Snackbar.LENGTH_SHORT).show();
                     fab.setImageDrawable(getResources().getDrawable(R.drawable.edit));
-                    name.setEnabled(false);no.setEnabled(false);dob.setEnabled(false);
+                    name.setEnabled(false);
+                    no.setEnabled(false);
+                    dob.setEnabled(false);
                     flag=true;
                 }
             }
