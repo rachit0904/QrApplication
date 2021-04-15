@@ -39,7 +39,9 @@ public class home extends AppCompatActivity {
     ImageView statusColor;
     SwipeRefreshLayout refreshLayout;
     int addedCount=-1;
-    ArrayList<String> names=new ArrayList<>();ArrayList<String> no=new ArrayList<>();ArrayList<String> uid=new ArrayList<>();
+    ArrayList<String> names=new ArrayList<>();
+    ArrayList<String> no=new ArrayList<>();
+    ArrayList<String> uid=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
