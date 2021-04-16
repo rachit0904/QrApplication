@@ -18,7 +18,7 @@ public class QR extends AppCompatActivity {
         setContentView(R.layout.activity_share_profile);
         TabLayout tabLayout = findViewById(R.id.tablayout);
         ViewPager viewPager=findViewById(R.id.pager2);
-        PagerAdapter2 adapter=new PagerAdapter2(getSupportFragmentManager(),tabLayout.getTabCount(),this);
+        qrToolbarAdapter adapter=new qrToolbarAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),this);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 

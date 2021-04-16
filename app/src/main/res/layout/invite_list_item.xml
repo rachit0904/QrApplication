@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/userImg"
-                android:src="@drawable/user"
+                android:src="@drawable/user2"
                 android:layout_marginLeft="5dp"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"/>

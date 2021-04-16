@@ -82,6 +82,7 @@ public class inviteContacts extends Fragment {
               transaction.commit();
           }
       });
+
         title.setText("Contacts");
         recyclerView=view.findViewById(R.id.inviteRecycler);
         recyclerView.hasFixedSize();

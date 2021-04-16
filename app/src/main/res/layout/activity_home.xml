@@ -24,8 +24,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:pointerIcon="arrow"
-                    app:title="">
+                    android:pointerIcon="arrow">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -45,24 +44,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp">
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="14dp">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/userImage"
-                        android:elevation="15dp"
-                        android:layout_width="70dp"
-                        android:layout_height="68dp"
+                        android:layout_width="58dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginBottom="6dp"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/user2" />
 
                     <ImageView
                         android:id="@+id/availibility"
                         android:layout_width="10dp"
                         android:layout_height="10dp"
                         android:layout_gravity="top"
-                        android:layout_marginLeft="-12dp"
                         android:src="@drawable/available" />
 
                     <TextView
@@ -70,26 +67,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="14dp"
+                        android:layout_marginLeft="12dp"
                         android:hint="Username"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
                 </LinearLayout>
-
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#2B2B2B"
+                        app:tabMode="fixed"
                         app:tabIndicatorColor="#CFCFCF"
                         app:tabIndicatorFullWidth="false"
                         app:tabIndicatorHeight="3dp"
-                        app:tabMode="fixed"
                         app:tabTextColor="@android:color/white">
-
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tab0"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Feeds" />
@@ -99,7 +93,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Explore" />
-
                         <com.google.android.material.tabs.TabItem
                             android:id="@+id/tab2"
                             android:layout_width="wrap_content"
@@ -111,7 +104,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Calls" />
-
                     </com.google.android.material.tabs.TabLayout>
             </com.google.android.material.appbar.AppBarLayout>
 

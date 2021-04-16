@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerAdapter2 extends FragmentPagerAdapter {
+public class qrToolbarAdapter extends FragmentPagerAdapter {
     private int noOfTabs;
     Context mContext;
-    public PagerAdapter2(@NonNull FragmentManager fm, int tabs, Context context) {
+    public qrToolbarAdapter(@NonNull FragmentManager fm, int tabs, Context context) {
         super(fm);
         this.noOfTabs=tabs;
         mContext=context;

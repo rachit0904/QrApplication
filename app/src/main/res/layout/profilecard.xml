@@ -19,7 +19,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="15dp"
-            android:src="@drawable/user" />
+            android:src="@drawable/user2" />
         <LinearLayout
             android:id="@+id/linlayout"
             android:layout_marginTop="46dp"
