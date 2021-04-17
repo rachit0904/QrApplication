@@ -1,5 +1,6 @@
 package com.example.qrapplication;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -16,12 +17,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,23 +40,25 @@ public class inviteContacts extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<UsersData> dataList;
-
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
     ArrayList<String> names=new ArrayList<>();
     ArrayList<String> no=new ArrayList<>();
     ArrayList<String> uid=new ArrayList<>();
+    ArrayList<String> imageUrl=new ArrayList<>();
+    FirebaseStorage storage;
+    StorageReference profileRef;
 
   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_invitecontacts,null);
         TextView title=getActivity().findViewById(R.id.inboxTitle);
-
       auth= FirebaseAuth.getInstance();
       database= FirebaseDatabase.getInstance();
       reference=database.getReference().child("users").child(auth.getUid());
+      storage= FirebaseStorage.getInstance();
 
       reference.addValueEventListener(new ValueEventListener() {
           @Override
@@ -91,14 +98,30 @@ public class inviteContacts extends Fragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                for(String uid : uid){
+                    Toast.makeText(getActivity(), uid, Toast.LENGTH_SHORT).show();
+                    profileRef=FirebaseStorage.getInstance().getReference().child("users").child(uid);
+                    profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            imageUrl.add(uri.toString());
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            imageUrl.add(null);
+                        }
+                    });
+                }
+                Toast.makeText(getActivity(), imageUrl.toString(), Toast.LENGTH_SHORT).show();
                 for(int i=0;i<names.size();i++){
-                    UsersData data=new UsersData(names.get(i),no.get(i));
+                    UsersData data=new UsersData(names.get(i),no.get(i),uid.get(i));
                     dataList.add(data);
                 }
                 adapter=new Adapter3(view.getContext(),dataList);
                 recyclerView.setAdapter(adapter);
             }
-        },400);
+        },300);
         return view;
     }
 

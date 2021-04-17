@@ -66,8 +66,6 @@ public class home extends AppCompatActivity {
         user=findViewById(R.id.userImage);
         profileRef= FirebaseStorage.getInstance().getReference().child("users").child(getIntent().getStringExtra("uid"));
 
-        setProfilePic();
-
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +104,7 @@ public class home extends AppCompatActivity {
 
             }
         });
+
         //adds the scanned contact to list
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -119,7 +118,7 @@ public class home extends AppCompatActivity {
                 }
             }
         },800);
-
+        setProfilePic();
         TabLayout tabLayout = findViewById(R.id.tabs);
         checkNetwork();
         ViewPager viewPager=findViewById(R.id.pager);

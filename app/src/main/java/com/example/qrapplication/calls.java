@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Data.UsersData;
+import Data.contactsData;
 import RecyclerAdapter.Adapter2;
 
 public class calls extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<UsersData> dataList;
+    private List<contactsData> dataList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class calls extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         dataList=new ArrayList<>();
         for(int i=1;i<10;i++){
-            UsersData data=new UsersData("User "+i,"9637216675");
+            contactsData data=new contactsData("User "+i,"9637216675");
             dataList.add(data);
         }
         adapter=new Adapter2(view.getContext(),dataList);

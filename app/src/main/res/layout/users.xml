@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="80dp" >
 
-
-
         <RelativeLayout
             android:background="@color/white"
             android:padding="15dp"
@@ -23,7 +21,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImg2"
                 android:src="@drawable/user2"
                 android:layout_toRightOf="@id/selectContact"

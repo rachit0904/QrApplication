@@ -2,9 +2,11 @@ package Data;
 
 public class contactsData {
 
-    String name,no,uid;
+    String name,no;
 
-    public contactsData() {
+    public contactsData(String name, String no) {
+        this.name = name;
+        this.no = no;
     }
 
     public String getName() {
@@ -23,11 +25,4 @@ public class contactsData {
         this.no = no;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 }

@@ -77,6 +77,7 @@ public class profilepage extends AppCompatActivity {
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                reference.child("profile_pic_url").setValue(uri.toString());
                 Picasso.get().load(uri).into(dp);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -170,7 +171,6 @@ public class profilepage extends AppCompatActivity {
         progressDialog.setTitle("Uploading image...");
         progressDialog.show();
         StorageReference profilePic=storageReference.child("users/"+imageFileName);
-        reference.child("profile_pic_url").setValue(imageUri.toString());
         profilePic.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

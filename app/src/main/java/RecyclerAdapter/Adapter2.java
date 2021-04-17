@@ -15,13 +15,14 @@ import com.example.qrapplication.R;
 import java.util.List;
 
 import Data.UsersData;
+import Data.contactsData;
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder>  {
 
     private Context context;
-    private List<UsersData> data;
+    private List<contactsData> data;
 
-    public Adapter2(Context context, List<UsersData> data) {
+    public Adapter2(Context context, List<contactsData> data) {
         this.context = context;
         this.data = data;
     }
@@ -35,9 +36,9 @@ public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        UsersData usersData=data.get(position);
+        contactsData usersData=data.get(position);
         holder.name.setText(usersData.getName());
-        holder.no.setText(usersData.getNumber());
+        holder.no.setText(usersData.getNo());
     }
 
     @Override
