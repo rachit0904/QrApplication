@@ -1,4 +1,4 @@
-package com.example.qrapplication;
+package com.project.qrapplication;
 
 import android.content.Intent;
 import android.os.Bundle;

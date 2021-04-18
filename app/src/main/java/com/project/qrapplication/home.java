@@ -1,4 +1,4 @@
-package com.example.qrapplication;
+package com.project.qrapplication;
 
 import android.content.Context;
 import android.content.Intent;
@@ -111,8 +111,6 @@ public class home extends AppCompatActivity {
             public void run() {
                 if(getIntent().getStringExtra("scanned uid")!=null && addedCount!=-1){
                     int userCount=addedCount+1;
-                    myRef.child("added_contacts").child(String.valueOf(userCount)).child("name").setValue(getIntent().getStringExtra("scanned name"));
-                    myRef.child("added_contacts").child(String.valueOf(userCount)).child("no").setValue(getIntent().getStringExtra("scanned no"));
                     myRef.child("added_contacts").child(String.valueOf(userCount)).child("uid").setValue(getIntent().getStringExtra("scanned uid"));
                     myRef.child("available_contacts").setValue(String.valueOf(userCount));
                 }

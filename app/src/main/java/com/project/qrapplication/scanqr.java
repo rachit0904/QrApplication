@@ -1,14 +1,14 @@
-package com.example.qrapplication;
+package com.project.qrapplication;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +19,16 @@ import android.widget.Toast;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -32,8 +36,9 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class scanqr extends Fragment {
     CodeScanner codeScanner;
@@ -45,7 +50,10 @@ public class scanqr extends Fragment {
     CodeScannerView scannerView;
     FirebaseAuth auth;
     FirebaseDatabase database;
-    DatabaseReference reference,reference2;
+    DatabaseReference reference2;
+    Uri imagepath;
+    FirebaseStorage storage;
+    StorageReference profileRef;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class scanqr extends Fragment {
         scannerView=view.findViewById(R.id.scannerView);
         auth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
+        storage= FirebaseStorage.getInstance();
         TextView scannedText=view.findViewById(R.id.scannedText);
         codeScanner =new CodeScanner(view.getContext(),scannerView);
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -63,17 +72,22 @@ public class scanqr extends Fragment {
                     public void run() {
                         scannedText.setText(result.getText());
                         if(!scannedText.getText().toString().isEmpty()){
+
                             builder=new AlertDialog.Builder(getActivity());
+
                             View view1=getLayoutInflater().inflate(R.layout.profilecard,null);
+
                             addBtn=view1.findViewById(R.id.addBtn);
                             scannedName=view1.findViewById(R.id.scannedName);
                             scannedNo=view1.findViewById(R.id.scannedNo);
+
                             reference2=database.getReference().child("users").child(scannedText.getText().toString());
                             reference2.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     scannedName.setText(snapshot.child("name").getValue(String.class));
                                     scannedNo.setText(snapshot.child("no").getValue(String.class));
+
                                 }
 
                                 @Override
@@ -81,16 +95,32 @@ public class scanqr extends Fragment {
 
                                 }
                             });
+
+
+                            CircleImageView userImage=view1.findViewById(R.id.scannedUserimage);
+                            profileRef=storage.getReference().child("users").child(scannedText.getText().toString());
+                            profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    imagepath=uri;
+                                    Picasso.get().load(uri).into(userImage);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    imagepath=null;
+                                }
+                            });
+
                             builder.setView(view1);
                             dialog=builder.create();
                             dialog.show();
+
                             addBtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent=new Intent(getActivity(),home.class);
                                     intent.putExtra("scanned uid",scannedText.getText().toString());
-                                    intent.putExtra("scanned name",scannedName.getText().toString());
-                                    intent.putExtra("scanned no",scannedNo.getText().toString());
                                     intent.putExtra("uid",getActivity().getIntent().getStringExtra("uid"));
                                     Toast.makeText(getContext(), "user added!", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();

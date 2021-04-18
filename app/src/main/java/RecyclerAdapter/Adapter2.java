@@ -10,11 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.qrapplication.R;
+import com.project.qrapplication.R;
 
 import java.util.List;
 
-import Data.UsersData;
 import Data.contactsData;
 
 public class Adapter2 extends RecyclerView.Adapter<Adapter2.ViewHolder>  {

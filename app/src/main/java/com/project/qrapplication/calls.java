@@ -1,4 +1,4 @@
-package com.example.qrapplication;
+package com.project.qrapplication;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import Data.UsersData;
 import Data.contactsData;
 import RecyclerAdapter.Adapter2;
 

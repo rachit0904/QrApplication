@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.qrapplication.R;
+import com.project.qrapplication.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,6 +43,10 @@ public class Adapter3 extends RecyclerView.Adapter<Adapter3.ViewHolder>  {
         UsersData usersData=data.get(position);
         holder.name.setText(usersData.getName());
         holder.no.setText(usersData.getNumber());
+        String url=usersData.getImageUrl();
+        if(url!="na"){
+            Picasso.get().load(url).into(holder.userImage);
+        }
     }
 
     @Override
@@ -62,7 +66,6 @@ public class Adapter3 extends RecyclerView.Adapter<Adapter3.ViewHolder>  {
             delete=itemView.findViewById(R.id.deleteUser);
             select=itemView.findViewById(R.id.selectContact);
             userImage=itemView.findViewById(R.id.userImg2);
-            itemView.canScrollHorizontally(View.SCROLL_AXIS_HORIZONTAL);
         }
     }
 }
