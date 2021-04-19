@@ -3,6 +3,8 @@ package com.project.qrapplication;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -38,12 +40,12 @@ public class inviteContacts extends Fragment {
     DatabaseReference reference;
     ArrayList<String> uid=new ArrayList<>();
     FirebaseStorage storage;
-
+    TextView subTitle;
   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_invitecontacts,null);
-      TextView subTitle=getActivity().findViewById(R.id.selectSubTitle);
+      subTitle=getActivity().findViewById(R.id.selectSubTitle);
       auth= FirebaseAuth.getInstance();
       database= FirebaseDatabase.getInstance();
       reference=database.getReference().child("users");
@@ -68,16 +70,18 @@ public class inviteContacts extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         dataList=new ArrayList<>();
 
+        return view;
+    }
 
+    private void setList(View view) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-//                if(uid.size()>0){
-//                    subTitle.setText(uid.size());
-//                    subTitle.setVisibility(View.VISIBLE);
-//                }
+                if(uid.size()>0){
+                    subTitle.setText(uid.size()+" contacts");
+                    subTitle.setVisibility(View.VISIBLE);
+                }
                 for(String uid : uid){
-                    Toast.makeText(getActivity(), uid, Toast.LENGTH_SHORT).show();
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,6 +91,7 @@ public class inviteContacts extends Fragment {
                                     snapshot.child(uid).child("profile_pic_url").getValue(String.class)
                             );
                             dataList.add(data);
+                            adapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -95,12 +100,16 @@ public class inviteContacts extends Fragment {
                         }
                     });
                 }
-                Toast.makeText(getActivity(), String.valueOf(dataList.size()), Toast.LENGTH_SHORT).show();
                 adapter=new Adapter3(view.getContext(),dataList);
                 recyclerView.setAdapter(adapter);
             }
-        },500);
-
-        return view;
+        },200);
     }
+
+    @Override
+    public void onStart() {
+        setList(getView());
+        super.onStart();
+    }
+
 }
