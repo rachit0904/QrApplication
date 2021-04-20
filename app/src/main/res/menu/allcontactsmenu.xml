@@ -10,9 +10,6 @@
         android:title="Refresh" />
     <item android:id="@+id/inviteUser" app:showAsAction="withText"
         android:title="Invite" />
-    <item android:id="@+id/share" app:showAsAction="withText"
-        android:title="Share" />
-
 
 
 </menu>

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +51,12 @@ public class Selectcontacts extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.refresh){
             addFragment(new inviteContacts());
+        }else if(item.getItemId()==R.id.inviteUser){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Download app and sign up to get started and enjoy all social media benefits in one app! https://drive.google.com/file/d/1EiHrnXIyO8ES6Dvy-n9M4kbQDfjuddXf/view?usp=sharing");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
         }
         return super.onOptionsItemSelected(item);
     }
