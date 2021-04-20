@@ -1,12 +1,15 @@
 package RecyclerAdapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Adapter3 extends RecyclerView.Adapter<Adapter3.ViewHolder>  {
 
     private Context context;
-    private List<UsersData> data;
+    public List<UsersData> data;
 
     public Adapter3(Context context, List<UsersData> data) {
         this.context = context;
@@ -47,6 +50,27 @@ public class Adapter3 extends RecyclerView.Adapter<Adapter3.ViewHolder>  {
         if(url!="na"){
             Picasso.get().load(url).into(holder.userImage);
         }
+        holder.userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog dialog;
+                AlertDialog.Builder builder=new AlertDialog.Builder(v.getContext());
+                View view=LayoutInflater.from(context).inflate(R.layout.image_enlarge_preview,null);
+                ImageView imageView=view.findViewById(R.id.imagePreview);
+                TextView username=view.findViewById(R.id.vieweduserNme);
+                username.setText(usersData.getName());
+                if(url!="na"){
+                    Picasso
+                            .get()
+                            .load(url)
+                            .fit()
+                            .into(imageView);
+                    builder.setView(view);
+                    dialog=builder.create();
+                    dialog.show();
+                }
+            }
+        });
     }
 
     @Override

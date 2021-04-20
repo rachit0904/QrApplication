@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -69,7 +70,6 @@ public class inviteContacts extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         dataList=new ArrayList<>();
-
         return view;
     }
 
@@ -108,8 +108,10 @@ public class inviteContacts extends Fragment {
 
     @Override
     public void onStart() {
-        setList(getView());
         super.onStart();
+        if(dataList.isEmpty()) {
+            setList(getView());
+        }
     }
 
 }
