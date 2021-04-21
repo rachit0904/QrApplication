@@ -14,4 +14,4 @@
 
 <br>
 
-[Download Apk](https://firebasestorage.googleapis.com/v0/b/qrapp-2d4f0.appspot.com/o/scanner.apk?alt=media&token=ffd54330-5280-4256-8c24-1ba5d8cc7c08)
+[Download Apk](https://drive.google.com/file/d/1EiHrnXIyO8ES6Dvy-n9M4kbQDfjuddXf/view?usp=sharing)
