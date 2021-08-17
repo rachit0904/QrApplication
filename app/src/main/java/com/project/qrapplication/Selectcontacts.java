@@ -54,7 +54,8 @@ public class Selectcontacts extends AppCompatActivity {
         }else if(item.getItemId()==R.id.inviteUser){
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Download app and sign up to get started and enjoy all social media benefits in one app! https://drive.google.com/file/d/1EiHrnXIyO8ES6Dvy-n9M4kbQDfjuddXf/view?usp=sharing");
+            String appUrl="https://drive.google.com/file/d/1EiHrnXIyO8ES6Dvy-n9M4kbQDfjuddXf/view?usp=sharing";
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Download app and sign up to get started and enjoy all social media benefits in one app! "+appUrl);
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
         }
